@@ -8,3 +8,7 @@ const axios = require('axios');
 
 // Initialize Express
 const app = express();
+
+// Handlebars
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
