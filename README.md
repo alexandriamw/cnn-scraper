@@ -1,1 +1,1 @@
-# cnn-scraper
+# cbs-scraper

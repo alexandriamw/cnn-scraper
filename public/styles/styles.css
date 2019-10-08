@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fjalla One', sans-serif;
+    background-image: url('background.jpg');
+}
+
+#savedArticlesPage {
+    display: none;
+}
+
+.myNav {
+    background: #8BA082;
+    text-align: center;
+    color: #394053;
+    padding: 34px 0;
+    box-shadow: #677761 5px 5px;
+    border-radius: 5px;
+}
+
+h1 {
+    margin: 0 0 20px 0;
+}
+
+.title {
+    font-size: 36px;
+}
+
+.buttonStyle {
+    background-color: #E28163;
+    border-radius: 6px;
+    padding: 10px;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+    box-shadow: #C4684C 3px 3px;
+    font-size: 14px;
+    color: #394053;
+    font-weight: bold;
+}
+
