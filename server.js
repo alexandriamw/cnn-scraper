@@ -69,14 +69,27 @@ app.get("/scrape", function (req, res) {
                     console.log(err);
                 });
         });
-    });
+    }).finally(function () {
+        // Send a message to the client
+        res.send("Scrape Complete");
+    })
 });
-
-
 
 // Routes
 app.get("/", function (req, res) {
     res.render("index");
+});
+
+app.get("/articles", function (req, res) {
+    const articleCollection = [];
+
+    db.Article.find({}, function(err, articles) {
+        articles.forEach(function(article) {
+            articleCollection.push(article);
+        });
+
+        res.send(articleCollection);
+    })
 });
 
 // Starts the server to begin listening
