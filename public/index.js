@@ -17,8 +17,16 @@ document.getElementById("scrape").addEventListener("click", function () {
             $.getJSON("/articles", function (data) {
                 // For each one
                 for (var i = 0; i < data.length; i++) {
+                    const articleMarkup = `
+                        <div class="eachArticle" data-id="${data[i]._id}">
+                            <h2><a href="${data[i].link}">${data[i].title}</a></h2>
+                            <br>
+                            <p>${data[i].description}</p>
+                            <button class="buttonStyle">Save Article</button>
+                        </div>
+                    `;
                     // Display the information on the page
-                    $("#articleList").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<br />" + data[i].description + "</p>");
+                    $("#articleList").append(articleMarkup);
                 }
             });
         });

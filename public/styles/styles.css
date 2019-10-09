@@ -46,8 +46,14 @@ h1 {
     height: fit-content;
 }
 
-p {
+.eachArticle {
     background: #BFD1B8;
+    color: #394053;
     margin: 10px;
     padding: 20px;
 }
+
+a {
+    color: #394053;
+}
+
