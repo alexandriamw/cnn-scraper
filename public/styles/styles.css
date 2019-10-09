@@ -16,8 +16,7 @@ body {
     text-align: center;
     color: #394053;
     padding: 34px 0;
-    box-shadow: #677761 5px 5px;
-    border-radius: 5px;
+    border-bottom: #677761 5px solid;
 }
 
 h1 {
@@ -41,3 +40,14 @@ h1 {
     font-weight: bold;
 }
 
+#articleList {
+    background: #8BA082;
+    margin: 30px;
+    height: fit-content;
+}
+
+p {
+    background: #BFD1B8;
+    margin: 10px;
+    padding: 20px;
+}

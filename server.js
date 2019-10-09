@@ -10,7 +10,7 @@ var db = require("./models");
 
 // Initialize Express
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 
 app.use(express.static("public"));
 
@@ -26,6 +26,7 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
+// Mongoose
 mongoose.connect("mongodb://localhost/articledb", {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -49,8 +50,7 @@ app.get("/scrape", function (req, res) {
             // Description of each article
             var description = $(element).find(".description").text().trim();
 
-            // In the currently selected element, look at its child elements (i.e., its a-tags),
-            // then save the values for any "href" attributes that the child elements may have
+            // In the currently selected element, look at its parent element, then save the values for any "href" attributes that the parent element may have
             var link = $(element).parent().attr("href").trim();
 
             const result = {
