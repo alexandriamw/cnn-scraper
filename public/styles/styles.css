@@ -40,7 +40,7 @@ h1 {
     font-weight: bold;
 }
 
-#articleList {
+#articleList, #savedArticleList {
     background: #8BA082;
     margin: 30px;
     height: fit-content;

@@ -29,7 +29,8 @@ app.set("view engine", "handlebars");
 // Mongoose
 mongoose.connect("mongodb://localhost/articledb", {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 }).then(() => {
     console.log('DB Connected!')
 }).catch(err => {
@@ -56,7 +57,8 @@ app.get("/scrape", function (req, res) {
             const result = {
                 title: title,
                 link: link,
-                description: description
+                description: description,
+                saved: false
             };
 
             db.Article.create(result)
@@ -90,6 +92,39 @@ app.get("/articles", function (req, res) {
 
         res.send(articleCollection);
     })
+});
+
+app.get("/savedArticles", function (req, res) {
+    const articleCollection = [];
+
+    db.Article.find({
+        saved: true
+    }, function(err, articles) {
+        articles.forEach(function(article) {
+            articleCollection.push(article);
+        });
+
+        res.send(articleCollection);
+    })
+});
+
+app.get("/clearArticles", function (req, res) {
+    db.Article.deleteMany({}, function(err) {
+        res.send("articles deleted");
+    })
+});
+
+app.post("/save/:articleId", function (req, res) {
+    const save = req.body.save;
+    const articleId = req.params.articleId;
+
+    db.Article.findOneAndUpdate({ "_id": req.body.articleId }, { saved: save }, function (err, doc) {
+        if (err) {
+            return res.send(500, {error: err});
+        }
+
+        return res.send("saved article: " + articleId);
+    });
 });
 
 // Starts the server to begin listening
