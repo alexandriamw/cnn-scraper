@@ -1,4 +1,4 @@
-# CBS-scraper
+# CBS-Scraper
 
 This is a web app that scrapes articles from Minnesota CBS News (https://minnesota.cbslocal.com/). The articles are displayed for the user to view, save, and leave comments about. The scraped articles are saved in a MongoDB database, as well as the comments about each article.
 
@@ -9,6 +9,6 @@ This is a web app that scrapes articles from Minnesota CBS News (https://minneso
 - [Cheerio](https://www.npmjs.com/package/cheerio)
 - [Axios](https://www.npmjs.com/package/axios)
 
-## See it on Heroku
+## See it on [Heroku](https://cbs-scraper.herokuapp.com/)
 
 
