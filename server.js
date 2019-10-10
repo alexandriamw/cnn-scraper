@@ -26,16 +26,20 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+mongoose.connect(MONGODB_URI);
+
 // Mongoose
-mongoose.connect("mongodb://localhost/articledb", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-}).then(() => {
-    console.log('DB Connected!')
-}).catch(err => {
-    console.log("DB Connection Error:", err.message);
-});
+// mongoose.connect("mongodb://localhost/articledb", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false
+// }).then(() => {
+//     console.log('DB Connected!')
+// }).catch(err => {
+//     console.log("DB Connection Error:", err.message);
+// });
 
 // A GET route for scraping the CBS website
 app.get("/scrape", function (req, res) {
