@@ -40,6 +40,10 @@ h1 {
     font-weight: bold;
 }
 
+.saveArticle {
+    margin-top: 12px;
+}
+
 #articleList, #savedArticleList {
     background: #8BA082;
     margin: 30px;
@@ -56,4 +60,24 @@ h1 {
 a {
     color: #394053;
 }
+
+.articleNote {
+    background-color: #8BA082;
+    width: 400px;
+    height: fit-content;
+    border-radius: 8px;
+    margin-right: 20px;
+    margin-top: 8px;
+    padding: 6px 5px;
+    display: none;
+}
+.saveNote {
+    margin-bottom: 6px;
+    margin-left: 8px;
+}
+
+.textArea {
+    width: 100%;
+}
+
 

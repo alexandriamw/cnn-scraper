@@ -28,18 +28,11 @@ app.set("view engine", "handlebars");
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.connect(MONGODB_URI);
-
-// Mongoose
-// mongoose.connect("mongodb://localhost/articledb", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false
-// }).then(() => {
-//     console.log('DB Connected!')
-// }).catch(err => {
-//     console.log("DB Connection Error:", err.message);
-// });
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+});
 
 // A GET route for scraping the CBS website
 app.get("/scrape", function (req, res) {
@@ -62,7 +55,8 @@ app.get("/scrape", function (req, res) {
                 title: title,
                 link: link,
                 description: description,
-                saved: false
+                saved: false,
+                note: false
             };
 
             db.Article.create(result)
@@ -89,8 +83,8 @@ app.get("/", function (req, res) {
 app.get("/articles", function (req, res) {
     const articleCollection = [];
 
-    db.Article.find({}, function(err, articles) {
-        articles.forEach(function(article) {
+    db.Article.find({}, function (err, articles) {
+        articles.forEach(function (article) {
             articleCollection.push(article);
         });
 
@@ -103,8 +97,8 @@ app.get("/savedArticles", function (req, res) {
 
     db.Article.find({
         saved: true
-    }, function(err, articles) {
-        articles.forEach(function(article) {
+    }, function (err, articles) {
+        articles.forEach(function (article) {
             articleCollection.push(article);
         });
 
@@ -113,7 +107,7 @@ app.get("/savedArticles", function (req, res) {
 });
 
 app.get("/clearArticles", function (req, res) {
-    db.Article.deleteMany({}, function(err) {
+    db.Article.deleteMany({}, function (err) {
         res.send("articles deleted");
     })
 });
@@ -122,12 +116,37 @@ app.post("/save/:articleId", function (req, res) {
     const save = req.body.save;
     const articleId = req.params.articleId;
 
-    db.Article.findOneAndUpdate({ "_id": req.body.articleId }, { saved: save }, function (err, doc) {
+    db.Article.findOneAndUpdate({
+        "_id": req.body.articleId
+    }, {
+        saved: save
+    }, function (err, doc) {
         if (err) {
-            return res.send(500, {error: err});
+            return res.send(500, {
+                error: err
+            });
         }
 
         return res.send("saved article: " + articleId);
+    });
+});
+
+app.post("/saveNote/:articleId", function (req, res) {
+    const note = req.body.note;
+    const articleId = req.params.articleId;
+
+    db.Article.findOneAndUpdate({
+        "_id": req.body.articleId
+    }, {
+        note
+    }, function (err, doc) {
+        if (err) {
+            return res.send(500, {
+                error: err
+            });
+        }
+
+        return res.send("saved note: " + articleId);
     });
 });
 
